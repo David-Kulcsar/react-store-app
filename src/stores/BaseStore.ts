@@ -39,7 +39,8 @@ export abstract class BaseStore<T extends { id?: string }> {
                 }
             );
             const user = await result.json();
-            this.setItems([ user, ...this.items ]);
+            const oldItems = this.items.filter( item => item.id !== data.id);
+            this.setItems([ user, ...oldItems ]);
             return user;
         } catch(err) {
             console.error(err);

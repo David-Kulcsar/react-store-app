@@ -11,10 +11,11 @@ interface CardItem {
 interface AvatarCardProps {
     item: CardItem;
     onDelete: (id: string) => Promise<void>;
+    onEdit: (id: string) => void;
 }
 
 export function AvatarCard(props: AvatarCardProps) {
-    const { item, onDelete } = props;
+    const { item, onDelete, onEdit } = props;
     return (
         <Card className='grid-item' raised style={{ maxWidth: 200 }}>
             <CardActionArea>
@@ -41,9 +42,15 @@ export function AvatarCard(props: AvatarCardProps) {
             <CardActions>
                 <Button 
                     variant="contained" 
+                    color="primary"
+                    onClick={() => onEdit(item.id)}
+                > Edit </Button>
+                <Button 
+                    variant="contained" 
                     color="secondary"
                     onClick={() => onDelete(item.id)}
                 > Delete </Button>
+                
             </CardActions>
         </Card>
     );

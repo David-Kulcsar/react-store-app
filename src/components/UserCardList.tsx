@@ -14,11 +14,13 @@ export const UserCardList = observer((props: UserCardListProps) => {
         onSearch,
         newAvatarUrl,
         newUserName,
-        onAddUser, 
+        onSaveUser, 
         filteredItems: items,
         onNewUserNameChange,
         onNewAvatarChange,
-        onDelete
+        onDelete,
+        onCancel,
+        onEdit
     } = props.store;
 
     return (
@@ -27,14 +29,16 @@ export const UserCardList = observer((props: UserCardListProps) => {
             <div>
                 <input placeholder='Avatar Url' value={newAvatarUrl} onChange={onNewAvatarChange}></input>
                 <input placeholder='User Name' value={newUserName} onChange={onNewUserNameChange}></input>
-                <button onClick={onAddUser}>Add</button>
+                <button onClick={onCancel}>Cancel</button>
+                <button onClick={onSaveUser}>Save</button>
             </div>  
             <CardList 
                 items={items} 
                 itemRenderer={(item: User) => (
                     <AvatarCard 
                         item={{ id: item.id, title: item.username, avatar: item.avatar }} 
-                        onDelete={onDelete} 
+                        onDelete={onDelete}
+                        onEdit={onEdit}
                         key={item.id} 
                     />
                 )}
